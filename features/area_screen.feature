@@ -2,6 +2,7 @@ Feature: User is able to convert area units
 
   Background:
     Given I click on Got it button
+    And I land on Area screen
 
 #  Scenario: User is able to dismiss help
 #    Given I land on help popup
@@ -14,7 +15,7 @@ Feature: User is able to convert area units
     When I click on Swap button
     Then I see "Sq Metre" in From header
     And I see "Sq Kilometre" in To header
-  @wip
+
     Scenario Outline: User is able convert default units
       Given I click on Clear button
       When I enter "<target>" to From field
@@ -32,3 +33,17 @@ Feature: User is able to convert area units
     When I click on From field
     And I press "3" on soft keyboard
     Then I get  "3000000" in To field
+
+  @wip
+    Scenario Outline: Selection of measure from left and right columns results in right value in To field
+      Given I click on Clear button
+      When I select "<left_measure>" from left column
+      And I enter "<from_value>" to From field
+      And I select "<right_measure>" from right column
+      Then I get  "<to_value>" in To field
+
+      Examples:
+        |left_measure|from_value|right_measure|to_value|
+        |Hectare     |5         |Acre         |12.3553 |
+        |Acre        |25        |Sq Yard      |121000  |
+        |Sq Foot     |999       |Sq Inch      |143856  |
